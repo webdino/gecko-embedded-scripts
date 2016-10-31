@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>LED</title>
+</head>
+<body>
+<h1>LED</h1>
+<input id="led" type="checkbox">
+<script>
+var led = document.getElementById('led');
+led.onchange = function (e) {
+  var val = (e.target.checked) ? 1 : 0;
+  var req = new XMLHttpRequest();
+  req.open('PUT', '/gpio/E');
+  req.send(JSON.stringify({ value: val }));
+};
+</script>
+</body>
+</html>

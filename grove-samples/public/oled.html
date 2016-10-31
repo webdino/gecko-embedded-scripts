@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>OLED</title>
+</head>
+<body>
+<h1>OLED</h1>
+<input id="gauge" type="range" max="128" min="0">
+<script>
+var gauge = document.getElementById('gauge');
+gauge.onchange = function (e) {
+  var val = e.target.value;
+  var req = new XMLHttpRequest();
+  req.open('PUT', '/gauge/0');
+  req.send(JSON.stringify({ value: val }));
+};
+</script>
+</body>
+</html>

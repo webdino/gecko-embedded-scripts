@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Gesture</title>
+</head>
+<body>
+<h1>Gesture</h1>
+<div id="gesture"></div>
+<script>
+var gesture = document.getElementById('gesture');
+var event = new EventSource('/gesture');
+event.onmessage = function (e) {
+  var res = JSON.parse(e.data);
+  var flag = [];
+  if (res.flag & (1 << 0)) {
+    flag.push('up');
+  }
+  if (res.flag & (1 << 1)) {
+    flag.push('down');
+  }
+  if (res.flag & (1 << 2)) {
+    flag.push('left');
+  }
+  if (res.flag & (1 << 3)) {
+    flag.push('right');
+  }
+  if (res.flag & (1 << 4)) {
+    flag.push('forward');
+  }
+  if (res.flag & (1 << 5)) {
+    flag.push('back');
+  }
+  if (res.flag & (1 << 6)) {
+    flag.push('cw');
+  }
+  if (res.flag & (1 << 7)) {
+    flag.push('ccw');
+  }
+  if (res.flag & (1 << 8)) {
+    flag.push('wave');
+  }
+  gesture.innerHTML = flag.join(' ');
+};
+</script>
+</body>
+</html>

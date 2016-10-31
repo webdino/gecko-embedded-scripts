@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Button</title>
+</head>
+<body>
+<h1>Button</h1>
+<input id="button" type="checkbox">
+<script>
+var button = document.getElementById('button');
+setInterval(function () {
+  var req = new XMLHttpRequest();
+  req.onload = function () {
+    var res = JSON.parse(req.response);
+    button.checked = (res.value) ? true : false;
+  };
+  req.open('GET', '/gpio/G');
+  req.send();
+}, 100);
+</script>
+</body>
+</html>
