@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ADC</title>
+</head>
+<body>
+<h1>ADC</h1>
+<div id="adc"></div>
+<script>
+var adc = document.getElementById('adc');
+var event = new EventSource('/adc');
+event.onmessage = function (e) {
+  var res = JSON.parse(e.data);
+  adc.innerHTML = res.voltage + 'V';
+};
+</script>
+</body>
+</html>

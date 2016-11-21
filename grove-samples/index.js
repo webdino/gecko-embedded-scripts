@@ -80,4 +80,34 @@ app.put('/gauge/:row', function (req, res) {
   });
 });
 
+// ADC
+
+var ADC121 = require('./lib/ADC121');
+var adc = new ADC121(0);
+var voltage = 0;
+setInterval(function () {
+  adc.getVoltage(function (v) {
+    voltage = v;
+  });
+}, 100);
+
+app.get('/adc', function (req, res) {
+  req.setTimeout(Number.MAX_VALUE);
+
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+    'X-Accel-Buffering': 'no'
+  });
+
+  var timer = setInterval(function () {
+    res.write('data: ' + JSON.stringify({ voltage: voltage }) + '\n\n');
+  }, 100);
+
+  req.on('close', function () {
+    clearInterval(timer);
+  });
+});
+
 app.listen(3000);
