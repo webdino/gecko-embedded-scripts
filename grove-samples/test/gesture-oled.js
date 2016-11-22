@@ -1,8 +1,11 @@
 var PAJ7620 = require('../lib/PAJ7620');
 var SSD1308 = require('../lib/SSD1308');
+var I2C_BUS = 0;
 
-var gesture = new PAJ7620(0);
-var oled = new SSD1308(0);
+console.log("Please connect Gesture module to I2C bus " + I2C_BUS + ".");
+var gesture = new PAJ7620(I2C_BUS);
+console.log("Please connect OLED module to I2C bus " + I2C_BUS + ".");
+var oled = new SSD1308(I2C_BUS);
 
 var values = [ 0, 0, 0, 0, 0, 0, 0, 0 ];
 var bye = 0;
