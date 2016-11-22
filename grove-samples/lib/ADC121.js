@@ -1,7 +1,8 @@
 var i2c = require('i2c');
 
-var ADC121 = function (bus) {
-  var wire = new i2c(0x55, { device: '/dev/i2c-' + bus });
+var ADC121 = function (bus, addr) {
+  addr = addr || 0x55;
+  var wire = new i2c(addr, { device: '/dev/i2c-' + bus });
   var init = [
     [ 0x02, 0x20 ],
   ];
